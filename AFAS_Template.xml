@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<Crm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Country="US" Name="AFAS" Version="1" SupportsEmojis="true">
+  <Number Prefix="AsIs" MaxLength="[MaxLength]" />
+  <Connection MaxConcurrentRequests="4" />
+  <Parameters>
+    <Parameter Name="APIkey" Type="String" Parent="General Configuration" Editor="String" Title="APIkey" />
+  </Parameters>
+  <Authentication Type="Basic">
+    <Value>[APIKEY]:X</Value>
+  </Authentication>
+  <Scenarios>
+    <Scenario Id="" Type="REST" EntityId="Contacts">
+      <Request SkipIf="" Url="https://12345.rest.afas.online/ProfitRestServices/connectors/GetConnectorName?filterfieldids=Number&amp;filtervalues=[Number]&amp;operatortypes=1" MessagePasses="0" RequestEncoding="UrlEncoded" RequestType="Get" ResponseType="Json">
+        <Headers>
+          <Value Key="Authorization" Passes="0" Type="String">AfasToken TOKEN</Value>
+        </Headers>
+      </Request>
+      <Rules>
+        <Rule Type="Any">rows.ContactId</Rule>
+      </Rules>
+      <Variables>
+        <Variable Name="ContactID" LookupValue="" Path="rows.ContactId">
+          <Filter />
+        </Variable>
+        <Variable Name="FirstName" LookupValue="" Path="rows.Voornaam">
+          <Filter />
+        </Variable>
+        <Variable Name="LastName" LookupValue="" Path="rows.Achternaam">
+          <Filter />
+        </Variable>
+        <Variable Name="CompanyName" LookupValue="" Path="rows.Organisatie">
+          <Filter />
+        </Variable>
+        <Variable Name="PhoneBusiness" LookupValue="" Path="rows.Number">
+          <Filter />
+        </Variable>
+      </Variables>
+      <Outputs AllowEmpty="true">
+        <Output Type="ContactID" Passes="0" Value="[ContactID]" />
+        <Output Type="FirstName" Passes="0" Value="[FirstName]" />
+        <Output Type="LastName" Passes="0" Value="[LastName]" />
+        <Output Type="CompanyName" Passes="0" Value="[CompanyName]" />
+        <Output Type="PhoneBusiness" Passes="0" Value="[PhoneBusiness]" />
+        <Output Type="ContactUrl" Passes="0" Value="https://12345.afasinsite.nl/contactpersoon-prs?CdId=[ContactID]" />
+      </Outputs>
+    </Scenario>
+  </Scenarios>
+</Crm>
