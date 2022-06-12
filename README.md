@@ -25,3 +25,5 @@ Modify the values in the Variables and Outputs sections to your own field names.
 Example:
 
 If you use a field named Contact instead of ContactId, ```Path="rows.ContactId"``` would be changed to ```Path="rows.Contact"```
+
+It is also possible to use two seperate environments (or more), see `AFAS2Environments.xml`.
